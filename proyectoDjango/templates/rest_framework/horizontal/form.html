@@ -1,0 +1,25 @@
+<!-- proyectoDjango/templates/rest_framework/horizontal/form.html -->
+
+{% extends "rest_framework/horizontal/form.html" %}
+
+{% load rest_framework %}
+
+{% block form_top %}
+  <div class="custom-top">
+    {# Puedes agregar contenido personalizado encima del formulario si es necesario #}
+  </div>
+{% endblock form_top %}
+
+{% block form %}
+  <form enctype="multipart/form-data" method="{{ form.method }}" action="{{ form.action }}">
+    {% csrf_token %}
+    {{ form }}
+    <button type="submit">Guardar</button>
+  </form>
+{% endblock form %}
+
+{% block form_bottom %}
+  <div class="custom-bottom">
+    {# Puedes agregar contenido personalizado debajo del formulario si es necesario #}
+  </div>
+{% endblock form_bottom %}

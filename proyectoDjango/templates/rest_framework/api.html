@@ -1,0 +1,42 @@
+{% extends "rest_framework/base.html" %}
+
+{% block content %}
+  <div class="api-header">
+    <div class="path">
+      <span class="method {{ method|lower }}">{{ method }}</span>
+      <span class="endpoint">{{ path }}</span>
+      <span class="operation-name">{{ operation_name }}</span>
+    </div>
+    <div class="version">
+      {% if version %}
+        <span>{{ version }}</span>
+      {% endif %}
+    </div>
+  </div>
+  <div class="api-content">
+    {% include "rest_framework/includes/_requests.html" %}
+    <div class="api-views">
+      {% for section, views in view_sections.items %}
+        <div class="api-section">
+          <div class="api-section-title">{{ section }}</div>
+          {% for view in views %}
+            <div class="api-view">
+              <div class="api-view-heading">
+                <div class="api-view-title">
+                  <span class="method {{ view.method|lower }}">{{ view.method }}</span>
+                  <span class="view-name">{{ view.name }}</span>
+                </div>
+                <div class="api-view-url">
+                  <span>{{ view.url }}</span>
+                </div>
+              </div>
+              <div class="api-view-content">
+                {{ view.render_html|safe }}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}
